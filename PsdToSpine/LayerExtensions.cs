@@ -27,7 +27,7 @@ namespace PsdToSpine
             var h = imageSource.Height;
 
             //var format = channelCount == 3 ? TextureFormat.RGB24 : TextureFormat.ARGB32;
-
+            bool is4chan = channelCount == 4;
             var bitmap = new Bitmap(w, h);
 
             for (var y = h - 1; y >= 0; --y)
@@ -39,7 +39,7 @@ namespace PsdToSpine
                     var b = data[n++];
                     var g = data[n++];
                     var r = data[n++];
-                    var a = channelCount == 4 ? (byte)System.Math.Round(data[n++] / 255f * imageSource.Opacity * 255f) : (byte)System.Math.Round(imageSource.Opacity * 255f);
+                    var a = is4chan ? (byte)System.Math.Round(data[n++] / 255f * imageSource.Opacity * 255f) : (byte)System.Math.Round(imageSource.Opacity * 255f);
 
 
                     var color = Color.FromArgb(a, r, g, b);
